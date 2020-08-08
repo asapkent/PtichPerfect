@@ -30,8 +30,8 @@ class RecordSoundViewController: UIViewController {
                let recordingName = "recordedVoice.wav"
                let pathArray = [dirPath, recordingName]
                let filePath = URL(string: pathArray.joined(separator: "/"))
-
                let session = AVAudioSession.sharedInstance()
+        
                try! session.setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.defaultToSpeaker)
 
                try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
@@ -64,7 +64,6 @@ extension RecordSoundViewController: AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
             performSegue(withIdentifier: "recordsegue", sender: audioRecorder.url)
-            print("Segue")
         } else {
            print("Something went wrong.")
         }
